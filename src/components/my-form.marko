@@ -1,0 +1,86 @@
+<div.wrapper>
+    <form.fm method="POST" action="/login">
+        <div.ipt-name>
+            <div>
+                <label for="firstName">firstName:</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div>
+                <label for="lastName">lastName:</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+        </div>
+        <div.ipt-email>
+            <label for="emailAddress">emailAddress:</label>
+            <input type="email" id="emailAddress" name="emailAddress" required>
+        </div>
+        <div.title>this is a title</div>
+        <ul>
+             <for|item, index| of=state.list>
+                 <li key=index>${item.title}</li>
+             </for>
+        </ul>
+        <button.btn type="submit">learn more</button>
+    </form>
+</div>
+
+class {
+    onCreate() {
+        this.state =  {
+            list: [
+                {
+                    title: 'write something as  title1',
+                },
+                {
+                    title: 'write something as  title2',
+                },
+                {
+                    title: 'write something as  title3',
+                },
+                {
+                    title: 'write something as  title4',
+                },
+                {
+                    title: 'write something as  title5',
+                },
+             ]
+
+        }
+
+   }
+
+}
+
+
+style {
+    .wrapper {
+        padding: 20px;
+        height: 100%;
+        .fm {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            overflow: hidden;
+        }
+        .ipt-name {
+            display: flex;
+        }
+        .ipt-email {
+            display: flex;
+            flex-direction: column;
+        }
+        .title {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-top: 20px;
+            text-align: center;
+        }
+        ul {
+            height: 30%;
+            overflow: auto;
+        }
+
+    }
+
+}

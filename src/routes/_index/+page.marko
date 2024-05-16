@@ -1,29 +1,148 @@
 <div.container>
-  <header>
-    <img.logo src="./logo.svg" alt="Marko"/>
-  </header>
-  <main>
-    <p>Edit <code>./src/routes/_index/+page.marko</code> and save to reload.</p>
-    <a href="https://markojs.com/docs/getting-started">
-      Learn Marko
-    </a>
-  </main>
+  <div.top>
+    <div>${state.countDown}</div>
+    <div>Allstate extended vehicle Cate</div>
+    <div.top-title>Protection that extends beyond your warranty</div>
+  </div>
+  <div.main>
+    <div.middle>
+         <div.middle-title>Allstate extended vehicle Cate</div>
+         <ul.middle-ul>
+             <for|item, index| of=state.list>
+                 <li.middle-li key=index>
+                    <p.middle-sub>${item.title}</p>
+                    <p.middle-content>${item.content}</p>
+                </li>
+             </for>
+         </ul>
+    </div>
+    <div.bottom>
+      <my-form/>
+    </div>
+  </div>
 </div>
-<mouse-mask/>
+
+class {
+    onCreate() {
+        this.state =  {
+            countDown: '',
+            list: [
+                {
+                    title: 'write something as  title1',
+                    content: 'write something as content1'
+                },
+                {
+                    title: 'write something as  title2',
+                    content: 'write something as content2'
+                },
+                {
+                    title: 'write something as  title3',
+                    content: 'write something as content3'
+                },
+                {
+                    title: 'write something as  title4',
+                    content: 'write something as content4'
+                },
+                {
+                    title: 'write something as  title5',
+                    content: 'write something as content5'
+                },
+             ]
+
+        }
+
+   }
+    onMount() {
+        this.interval = setInterval(this.getCountDown.bind(this), 1000); // 每秒更新一次倒计时
+    }
+    onDestroy() {
+      clearInterval(this.interval); // 清除定时器
+    }
+    getCountDown() {
+          const endDate = new Date('2024-05-31 23:59:59').getTime(); // 设置倒计时结束时间
+          const now = new Date().getTime(); // 获取当前时间
+          const distance = endDate - now; // 计算剩余时间
+          // 计算剩余时间中的时、分、秒
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          const countDownStr = `${days}:${hours > 9 ? hours: '0' + hours}:${minutes > 9 ? minutes : '0' + minutes}:${seconds > 9 ? seconds : '0' + seconds}`;
+          this.state.countDown = countDownStr
+    }
+}
 
 style {
   .container {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: clamp(1em, 2vw, 2em); 
-    padding: 1em;
+    font-size: clamp(1em, 1vw, 1em);
+    padding: 5em;
     box-sizing: border-box;
-    height:100%;
     width:100%;
-  }
-  img.logo {
-    width:12em;
+    .top {
+        box-sizing: border-box;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        line-height: 2em;
+        width: 100%;
+        height: 10rem;
+        background: #082e54;
+        color: white;
+        padding: 10px;
+        overflow: auto;
+        .top-title {
+            font-size: 2em;
+        }
+    }
+    .main {
+        margin-top: 10px;
+        width: 100%;
+        height: 400px;
+        display: flex;
+        border: unset;
+        .middle {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            margin: auto 20px 10px auto;
+            overflow: hidden;
+            flex-shrink: 1;
+            .middle-title {
+                width: 100%;
+                height: 20%;
+                overflow: auto;
+                background-color: #4169e1;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            .middle-ul {
+                height: 80%;
+                overflow: auto;
+                .middle-li {
+                    margin-bottom: 5px;
+                    .middle-sub {
+                        color: black;
+                        font-weight: 500;
+                    }
+                    .middle-content {
+                        color: #c0c0c0;
+                    }
+                }
+            }
+        }
+        .bottom {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            flex-shrink: 1;
+            background-color: #082e54;
+        }
+    }
+    @media (max-width: 600px) {
+        .main {
+            display: block;
+        }
+    }
   }
 }
